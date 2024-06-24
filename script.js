@@ -2,34 +2,26 @@ const container = document.querySelector(".container");
 const resetButton = document.querySelector(".resetButton");
 const promptButton = document.querySelector(".promptButton");
 
-
 function createGrid(size) {
-    
     container.innerHTML = '';
 
-    const divSize = 700 / size;
+    const cellSize = `${100 / size}%`;
 
-    for (let i = 0; i < size; i++) {
-        const row = document.createElement('div');
-        row.style.cssText = 'display: flex; flex: 1;';
+    for (let i = 0; i < size * size; i++) {
+        let div = document.createElement('div');
+        div.style.cssText = `
+            border: 1px solid black; 
+            width: ${cellSize}; 
+            height: ${cellSize}; 
+            box-sizing: border-box;
+        `;
         
-        for (let j = 0; j < size; j++) {
-            let div = document.createElement('div');
-            div.style.cssText = `border: 1px solid black; width: ${divSize}px; height: ${divSize}px; flex: 1;`;
-            
-            div.addEventListener('mouseenter', () => {
-                const randomColor = Math.floor(Math.random()*16777215).toString(16);
-                div.style.backgroundColor = "#" + randomColor;
-            });
-    
-            div.addEventListener('mouseleave', () => {
-            
-            });
-            
-            row.appendChild(div);
-        }
+        div.addEventListener('mouseenter', () => {
+            const randomColor = Math.floor(Math.random()*16777215).toString(16);
+            div.style.backgroundColor = "#" + randomColor;
+        });
         
-        container.appendChild(row);
+        container.appendChild(div);
     }
 }
 
